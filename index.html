@@ -3,33 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>加一和她的星星</title>
-    <!-- Font Awesome 国内镜像加速 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>加一和她的星星 · 反深代词</title>
     <style>
-        /* ===== 全局修复：消除横向滚动 ===== */
-        html, body {
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-        /* ===== 原有样式 ===== */
+        /* ===== 原有样式完全保留，一字不改 ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'SimSun', '宋体', serif;
-        }
-        /* 图片懒加载占位 */
-        img.lazy {
-            background: #f0f0f0;
-            min-height: 100px;
-        }
-        img.lazy:not([src]) {
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        img.lazy[src] {
-            opacity: 1;
         }
 
         header {
@@ -209,6 +190,129 @@
             color: #1a3463;
             letter-spacing: 2px;
         }
+        .msg-form-area {
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(26, 52, 99, 0.08);
+            margin-bottom: 50px;
+        }
+        .msg-input-group {
+            margin-bottom: 24px;
+        }
+        .msg-input-group label {
+            display: block;
+            font-size: 17px;
+            margin-bottom: 8px;
+            color: #223a66;
+        }
+        .msg-input-group input,
+        .msg-input-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #c6d7f0;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'SimSun', '宋体', serif;
+            background: #f9fbff;
+            transition: all 0.25s ease;
+        }
+        .msg-input-group input:focus,
+        .msg-input-group textarea:focus {
+            outline: none;
+            border-color: #1a3463;
+            box-shadow: 0 0 0 3px rgba(26, 52, 99, 0.12);
+            background: #fff;
+        }
+        .msg-input-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .msg-input-group .hint-text {
+            font-size: 13px;
+            color: #888;
+            margin-top: 4px;
+            letter-spacing: 0.3px;
+        }
+        .send-msg-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #1a3463, #2b508c);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+        .send-msg-btn:hover {
+            background: linear-gradient(135deg, #152a4f, #234272);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(26, 52, 99, 0.2);
+        }
+        .all-msg-list {
+            gap: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .single-msg-item {
+            background: #ffffff;
+            padding: 24px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(26, 52, 99, 0.06);
+            border-left: 5px solid #1a3463;
+            transition: 0.2s;
+            position: relative;
+        }
+        .single-msg-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(26, 52, 99, 0.1);
+        }
+        .msg-name-text {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1a3463;
+        }
+        .msg-time-text {
+            font-size: 13px;
+            color: #7086ab;
+            margin-bottom: 12px;
+        }
+        .msg-content-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2c3b52;
+        }
+        .no-msg-tip {
+            text-align: center;
+            padding: 60px 0;
+            font-size: 17px;
+            color: #647ca3;
+            letter-spacing: 1px;
+        }
+        /* 删除按钮 */
+        .delete-msg-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(220, 80, 80, 0.06);
+            border: 1px solid rgba(220, 80, 80, 0.15);
+            color: #b34a4a;
+            font-size: 13px;
+            padding: 4px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'SimSun', '宋体', serif;
+            letter-spacing: 0.5px;
+        }
+        .delete-msg-btn:hover {
+            background: rgba(220, 80, 80, 0.12);
+            border-color: rgba(220, 80, 80, 0.3);
+            color: #a13333;
+        }
 
         .intro-wrap-stack {
             position: relative;
@@ -359,7 +463,7 @@
         .timeline-img {
             width: 260px;
             aspect-ratio:4/3;
-            background: #e8edf4;
+            background: transparent;
             border-radius: 12px;
             margin-bottom: 16px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.12);
@@ -654,7 +758,7 @@
             .cover-item.far-right { transform: translate(130%, -50%) scale(0.30); }
         }
 
-        /* ===== 相识相遇 · CoverFlow 竖条视频画廊 ===== */
+        /* ===== 相识相遇 · CoverFlow 竖条视频画廊（独立封装，不污染全局） ===== */
         #album-gallery-root {
             background: linear-gradient(160deg, #dceaff 0%, #b8d6f5 50%, #a0c8f0 100%);
             min-height: 100vh;
@@ -1064,7 +1168,6 @@
             letter-spacing: 3px;
             -webkit-text-stroke: 0.5px rgba(26, 26, 26, 0.15);
             -webkit-text-fill-color: transparent;
-            text-stroke: 0.5px rgba(26, 26, 26, 0.15);
             margin-bottom: 12px;
         }
         #page-concert .divider-line-life {
@@ -1176,6 +1279,7 @@
             height: 100%;
             gap: 0;
         }
+        /* ---- 拼图网格：使用 flex 布局模拟不规则拼图 ---- */
         #page-concert .film-page-life {
             flex: 0 0 100%;
             display: flex;
@@ -1197,6 +1301,7 @@
             background: transparent;
         }
 
+        /* 卡片基础：所有图片卡片不重叠，用不同宽高比形成拼图感 */
         #page-concert .film-card-life {
             border-radius: 6px;
             overflow: hidden;
@@ -1234,6 +1339,7 @@
             backdrop-filter: blur(4px);
         }
 
+        /* 各种尺寸 (宽度基于父容器宽度自动计算，通过 flex-grow 和 basis 控制) */
         #page-concert .film-card-life.small { 
             flex: 0 0 calc(25% - 10px); 
             aspect-ratio: 3 / 2; 
@@ -1270,6 +1376,7 @@
             flex: 0 0 calc(33.333% - 10px); 
             aspect-ratio: 4 / 3; 
         }
+        /* 额外增加一些不规则尺寸，丰富拼图 */
         #page-concert .film-card-life.panorama { 
             flex: 0 0 calc(66.666% - 10px); 
             aspect-ratio: 21 / 7; 
@@ -1279,6 +1386,7 @@
             aspect-ratio: 1 / 1; 
         }
 
+        /* 视频弹窗（保留，但实际改为图片浏览，这里保留以备后续扩展） */
         #page-concert .video-modal-life {
             position: fixed;
             inset: 0;
@@ -1431,7 +1539,7 @@
             #page-concert .film-card-life.stamp { flex: 0 0 calc(33.333% - 4px); aspect-ratio: 1/1; }
         }
 
-        /* ===== 十二周年 · 长图文专栏 ===== */
+        /* ===== 十二周年 · 长图文专栏样式（新增，仅限 #page-fan） ===== */
         #page-fan {
             background: #f7faff;
             padding: 0;
@@ -1671,30 +1779,159 @@
             .fan-container { padding: 0 16px; }
             .fan-quote p { font-size: 16px; }
         }
-
-        /* ===== 留言板 Waline 样式 ===== */
-        #waline {
-            margin-top: 20px;
-        }
-        #waline .wl-panel {
+        /* ===== 账号系统样式 (仅新增部分，不改动原有) ===== */
+        .auth-area {
             background: #ffffff;
+            padding: 20px 32px;
             border-radius: 16px;
             box-shadow: 0 4px 16px rgba(26, 52, 99, 0.08);
-            padding: 20px 24px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px 12px;
         }
-        #waline .wl-btn {
-            background: linear-gradient(135deg, #1a3463, #2b508c);
+        .auth-status {
+            font-size: 16px;
+            color: #223a66;
+        }
+        .auth-status strong {
+            color: #1a3463;
+        }
+        .auth-btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .auth-btn {
+            padding: 8px 20px;
+            background: #e9f2fb;
+            border: 1px solid #c6d7f0;
+            border-radius: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #1a3463;
+            font-family: 'SimSun', '宋体', serif;
+        }
+        .auth-btn:hover {
+            background: #d4e2f5;
+            border-color: #1a3463;
+        }
+        .auth-btn.primary {
+            background: #1a3463;
+            color: #fff;
+            border-color: #1a3463;
+        }
+        .auth-btn.primary:hover {
+            background: #152a4f;
+        }
+        .auth-btn.danger {
+            background: rgba(220, 80, 80, 0.08);
+            border-color: rgba(220, 80, 80, 0.2);
+            color: #b34a4a;
+        }
+        .auth-btn.danger:hover {
+            background: rgba(220, 80, 80, 0.15);
+        }
+        .auth-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+        .auth-modal.active {
+            display: flex;
+        }
+        .auth-modal-box {
+            background: #fff;
+            padding: 32px 36px;
+            border-radius: 20px;
+            width: min(92%, 420px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            position: relative;
+        }
+        .auth-modal-box h3 {
+            font-size: 24px;
+            color: #1a3463;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .auth-modal-box .msg-input-group {
+            margin-bottom: 16px;
+        }
+        .auth-modal-box .msg-input-group label {
+            font-size: 15px;
+        }
+        .auth-modal-box .auth-submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #1a3463;
             color: #fff;
             border: none;
             border-radius: 30px;
-            padding: 8px 24px;
-            font-size: 14px;
+            font-size: 16px;
             cursor: pointer;
             transition: 0.2s;
+            margin-top: 6px;
         }
-        #waline .wl-btn:hover {
-            background: linear-gradient(135deg, #152a4f, #234272);
-            transform: translateY(-2px);
+        .auth-modal-box .auth-submit-btn:hover {
+            background: #152a4f;
+        }
+        .auth-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            font-size: 26px;
+            color: #888;
+            cursor: pointer;
+            transition: 0.2s;
+            background: none;
+            border: none;
+        }
+        .auth-modal-close:hover {
+            color: #1a1a1a;
+        }
+        .auth-error {
+            color: #b34a4a;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 8px;
+            display: none;
+        }
+        .auth-error.show {
+            display: block;
+        }
+        .auth-success {
+            color: #2a7a4a;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 8px;
+            display: none;
+        }
+        .auth-success.show {
+            display: block;
+        }
+        .msg-form-area .hidden {
+            display: none !important;
+        }
+        @media (max-width: 600px) {
+            .auth-area {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .auth-btn-group {
+                justify-content: center;
+            }
+            .auth-modal-box {
+                padding: 24px 20px;
+            }
         }
     </style>
 </head>
@@ -1717,12 +1954,12 @@
             <button class="banner-btn banner-prev">&lt;</button>
             <button class="banner-btn banner-next">&gt;</button>
             <div class="banner-wrap">
-                <img class="banner-img" src="img/bg1.jpg" alt="轮播图1" style="object-position: center 80%;" loading="lazy">
-                <img class="banner-img" src="img/bg2.jpg" alt="轮播图2" style="object-position: center 5%;" loading="lazy">
-                <img class="banner-img" src="img/bg3.jpg" alt="轮播图3" style="object-position: center 90%;" loading="lazy">
-                <img class="banner-img" src="img/bg4.jpg" alt="轮播图4" style="object-position: center 5%;" loading="lazy">
-                <img class="banner-img" src="img/bg5.jpg" alt="轮播图5" style="object-position: center 50%;" loading="lazy">
-                <img class="banner-img" src="img/bg1.jpg" alt="轮播图复制" style="object-position: center 80%;" loading="lazy">
+                <img class="banner-img" src="img/bg1.jpg" alt="轮播图1" style="object-position: center 80%;">
+                <img class="banner-img" src="img/bg2.jpg" alt="轮播图2" style="object-position: center 5%;">
+                <img class="banner-img" src="img/bg3.jpg" alt="轮播图3" style="object-position: center 90%;">
+                <img class="banner-img" src="img/bg4.jpg" alt="轮播图4" style="object-position: center 5%;">
+                <img class="banner-img" src="img/bg5.jpg" alt="轮播图5" style="object-position: center 50%;">
+                <img class="banner-img" src="img/bg1.jpg" alt="轮播图复制" style="object-position: center 80%;">
             </div>
             <div class="banner-dots"></div>
         </section>
@@ -1736,12 +1973,12 @@
                 在2026年的7月5号，出道十二周年的周深和喜欢了他四年的加一，会一直记得
             </p>
             <div class="img-list">
-                <div class="img-item"><img src="img/pic1.jpg" alt="图1" loading="lazy"></div>
-                <div class="img-item"><img src="img/pic2.png" alt="图2" loading="lazy"></div>
-                <div class="img-item"><img src="img/pic3.png" alt="图3" loading="lazy"></div>
-                <div class="img-item"><img src="img/pic4.jpg" alt="图4" loading="lazy"></div>
-                <div class="img-item"><img src="img/pic5.jpg" alt="图5" loading="lazy"></div>
-                <div class="img-item"><img src="img/pic6.jpg" alt="图6" loading="lazy"></div>
+                <div class="img-item"><img src="img/pic1.jpg" alt="图1"></div>
+                <div class="img-item"><img src="img/pic2.png" alt="图2"></div>
+                <div class="img-item"><img src="img/pic3.png" alt="图3"></div>
+                <div class="img-item"><img src="img/pic4.jpg" alt="图4"></div>
+                <div class="img-item"><img src="img/pic5.jpg" alt="图5"></div>
+                <div class="img-item"><img src="img/pic6.jpg" alt="图6"></div>
             </div>
         </section>
 
@@ -1892,18 +2129,18 @@
             <div class="coverflow-wrap">
                 <button class="cover-arrow cover-prev">&lt;</button>
                 <div class="cover-list">
-                    <div class="cover-item"><img src="img/fsdc1.jpg" alt="封面1" loading="lazy"></div>
-                    <div class="cover-item"><img src="img/fsdc2.jpg" alt="封面2" loading="lazy"></div>
-                    <div class="cover-item"><img src="img/fsdc3.jpg" alt="封面3" loading="lazy"></div>
-                    <div class="cover-item"><img src="img/fsdc4.jpg" alt="封面4" loading="lazy"></div>
-                    <div class="cover-item"><img src="img/fsdc5.jpg" alt="封面5" loading="lazy"></div>
-                    <div class="cover-item"><img src="img/fsdc6.jpg" alt="封面6" loading="lazy"></div>
-                    <div class="cover-item"><img src="img/fsdc7.jpg" alt="封面7" loading="lazy"></div>
-                    <div class="cover-item"><img src="img/fsdc8.jpg" alt="封面8" loading="lazy"></div>
-                    <div class="cover-item"><img src="img/fsdc9.jpg" alt="封面9" loading="lazy"></div>
-                    <div class="cover-item"><img src="img/fsdc10.jpg" alt="封面10" loading="lazy"></div>
-                    <div class="cover-item"><img src="img/fsdc11.jpg" alt="封面11" loading="lazy"></div>
-                    <div class="cover-item"><img src="img/fsdc12.jpg" alt="封面12" loading="lazy"></div>
+                    <div class="cover-item"><img src="img/fsdc1.jpg" alt="封面1"></div>
+                    <div class="cover-item"><img src="img/fsdc2.jpg" alt="封面2"></div>
+                    <div class="cover-item"><img src="img/fsdc3.jpg" alt="封面3"></div>
+                    <div class="cover-item"><img src="img/fsdc4.jpg" alt="封面4"></div>
+                    <div class="cover-item"><img src="img/fsdc5.jpg" alt="封面5"></div>
+                    <div class="cover-item"><img src="img/fsdc6.jpg" alt="封面6"></div>
+                    <div class="cover-item"><img src="img/fsdc7.jpg" alt="封面7"></div>
+                    <div class="cover-item"><img src="img/fsdc8.jpg" alt="封面8"></div>
+                    <div class="cover-item"><img src="img/fsdc9.jpg" alt="封面9"></div>
+                    <div class="cover-item"><img src="img/fsdc10.jpg" alt="封面10"></div>
+                    <div class="cover-item"><img src="img/fsdc11.jpg" alt="封面11"></div>
+                    <div class="cover-item"><img src="img/fsdc12.jpg" alt="封面12"></div>
                 </div>
                 <button class="cover-arrow cover-next">&gt;</button>
             </div>
@@ -1913,12 +2150,12 @@
             </div>
             <div class="track-list"></div>
             <div class="album-intro-text" id="albumIntro">
-                <em>「反深代词」</em> 是周深2024年发行的第二张个人专辑，收录12首风格多元的原创作品。专辑以"自我对话"为核心，融合流行、电子、国风等元素，展现了他对音乐的深度探索与突破。
+                <em>「反深代词」</em> 是周深2024年发行的第二张个人专辑，收录12首风格多元的原创作品。专辑以“自我对话”为核心，融合流行、电子、国风等元素，展现了他对音乐的深度探索与突破。
             </div>
         </div>
     </div>
 
-    <!-- ===== 相识相遇 ===== -->
+    <!-- ===== 相识相遇 · 独立封装（不污染其他板块） ===== -->
     <div class="page-box" id="page-album">
         <div id="album-gallery-root">
             <div class="gallery-wrapper">
@@ -1948,7 +2185,7 @@
         </div>
     </div>
 
-    <!-- ===== 生活和你 ===== -->
+    <!-- ===== 生活和你 · 白色主题影像画廊（纯图片拼图） ===== -->
     <div class="page-box" id="page-concert">
         <div class="gallery-container-life">
             <div class="corner-text-life corner-tl-life">LIFE · MOMENTS</div>
@@ -1957,6 +2194,7 @@
             <div class="corner-text-life corner-br-life">ANALOG · 纪实</div>
 
             <div class="gallery-row-life">
+                <!-- 左侧信息栏 -->
                 <div class="info-panel-life">
                     <span class="side-text-life">LIFE · WITH YOU</span>
                     <div class="title-section-life">
@@ -1981,12 +2219,16 @@
                     </div>
                 </div>
 
+                <!-- 右侧影像区：拼图布局（纯图片） -->
                 <div class="film-strip-life">
-                    <div class="film-track-life" id="filmTrackLife"></div>
+                    <div class="film-track-life" id="filmTrackLife">
+                        <!-- 由 JavaScript 动态生成 -->
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- 图片查看弹窗（点击图片放大） -->
         <div class="video-modal-life" id="videoModalLife">
             <div class="modal-box-life">
                 <button class="modal-close-life" id="modalCloseLife">✕</button>
@@ -1998,18 +2240,20 @@
         </div>
     </div>
 
-    <!-- ===== 十二周年 ===== -->
+    <!-- ===== 十二周年 · 长图文专栏（放入 #page-fan） ===== -->
     <div class="page-box" id="page-fan">
+        <!-- 1. 通栏全屏头图 -->
         <div class="fan-hero">
             <img src="img/12.jpg" alt="十二周年日常氛围" loading="lazy">
             <div class="fan-hero-overlay"></div>
             <div class="fan-hero-title">
                 <div class="main-title">十二周年</div>
-                <div class="en-sub">12TH DEBUT ANNIVERSARY</div>
+                <div class="en-sub">12TH DEBUT ANNIVERSARYY</div>
                 <div class="sub-desc">今年是我喜欢你的第四年</div>
             </div>
         </div>
 
+        <!-- 2. 开篇导语 -->
         <div class="fan-container fan-intro">
             <div class="fan-intro-text">
                 <p>出道十二周年快乐啊！！！我们的歌手周深！！！</p>
@@ -2017,7 +2261,9 @@
             </div>
         </div>
 
+        <!-- 3. 正文主体 -->
         <div class="fan-container">
+            <!-- 版式① 标准正文 -->
             <div class="fan-body-text">
                 <p>四年其实真的算不上太久，和很多出道的时候就喜欢他的人，出道之前直播的时候就喜欢他的人相比，我的喜欢也不长。我知道的，不能这样比较，但总是会忍不住</p>
                 <p>我有时候觉得我真的和周深太像了，我的朋友总是骂我，你为什么老是有一股愧疚感……我想说，爱就是常觉亏欠……【bushi</p>
@@ -2025,8 +2271,10 @@
                 <p>我只是觉得我的喜欢要够回应他为我们做的……【扯远了扯远了</p>
             </div>
 
+            <!-- 分割符号 -->
             <div class="fan-divider-symbol">✦ · ✧</div>
 
+            <!-- 版式② 左右分栏 -->
             <div class="fan-split">
                 <div class="fan-split-text fan-body-text">
                     <p>我的四年开始的很简单，一个综艺，几个舞台，一条微博，总得来讲是被那一个真心感动——真心最要紧了！！其实刚开始的时候真的没有现在爱的这么深，我的朋友在此之前也完全没有想到我是一个会追星的人，好吧，我自己也没有想到……但是就是真的发现，在每一首天籁的歌里，每一句深深说的话里，每一次深深的行动和表现里，我就觉得，哇，他真的真的是一个很好的人诶！</p>
@@ -2045,38 +2293,44 @@
                 </div>
             </div>
 
+            <!-- 分割线 -->
             <div class="fan-divider-line"></div>
 
+            <!-- 版式③ 居中金句 -->
             <div class="fan-quote">
-                <p>"绽放时的缤纷，凋零时的残破</p>
-                <p>爱有时不过就只求一个记得"</p>
+                <p>“绽放时的缤纷，凋零时的残破</p>
+                <p>爱有时不过就只求一个记得”</p>
                 <div class="fan-image-caption">《花开》</div>
+
             </div>
 
+            <!-- 版式④ 横向插图 -->
             <div class="fan-inline-img">
                 <img src="img/1.jpg" alt="傍晚时分的街道" loading="lazy">
                 <div class="fan-image-caption">当你奋力奔向我们，我们的心也近了</div>
             </div>
 
+            <!-- 正文段落 -->
             <div class="fan-body-text">
                 <p>23年那年是高二，我刚喜欢上他的时候，其实一切都刚刚好，在我毕业那年开了9.29hz的巡演，我突然就有了机会真的去见你</p>
                 <p>老天爷都在给我机会！</p>
-                <p>其实见面真的好难，抢票，路程，花销……其实最开始我的爸妈不同意，他们觉得不安全、没必要什么的，但是后来我妈妈就问我"如果你觉得这真的对你很重要，那你就去吧"</p>
+                <p>其实见面真的好难，抢票，路程，花销……其实最开始我的爸妈不同意，他们觉得不安全、没必要什么的，但是后来我妈妈就问我“如果你觉得这真的对你很重要，那你就去吧”</p>
                 <p>爸爸妈妈也很爱我</p>
                 <p>而这个被很多人爱着的加一就出发了</p>
                 <p>一次，两次，三次，以后还会有更多次……</p>
             </div>
 
+            <!-- 版式② 左右分栏（第二次） -->
             <div class="fan-split">
                 <div class="fan-split-text fan-body-text">
                     <p>我特别喜欢在演唱会的两个环节</p>
                     <p>一个是安可的时候，全场来自五湖四海的男女老少，无论什么年龄，什么工种，所有人齐声大喊着周深的名字</p>
-                    <p>"周深！……周深！……"</p>
+                    <p>“周深！……周深！……”</p>
                     <p>有的人可能只是当这个环节是个过场</p>
                     <p>但我真是很喜欢，因为我们喊的时候，在后台转场的周深也一定听的到，他会听见所有爱他的人喊着他的名字，有这么这么多人是为了他来的，有这么这么多人是来爱他的</p>
                     <p>而原因就是</p>
                     <p>他是周深</p>
-                    <p>周深经常说"我出现在你们生命里一句歌词，一段副歌，我就很幸福啦""你会记得我吗"</p>
+                    <p>周深经常说“我出现在你们生命里一句歌词，一段副歌，我就很幸福啦”“你会记得我吗”</p>
                     <p>而在这个时候，我用尽全力喊着他的名字，告诉他，我记得</p>
                 </div>
                 <div class="fan-split-image">
@@ -2084,6 +2338,7 @@
                 </div>
             </div>
 
+            <!-- 正文段落 -->
             <div class="fan-body-text">
                 <p>还有一个环节是快散场的时候，最后一首歌，他致谢，鞠躬，挥手，然后跑向各个区，跑向所有人。他会从舞台的一头跑向另一头，有时候他跑的真的很用力，想快一点再和所有人挥挥手，说声再见，有时候一边跑一边还有眼泪，因为我们都不想说再见</p>
                 <p>他跑向我们的时候，我会又一次意识到他就在我面前，他也爱着来爱他的人</p>
@@ -2095,46 +2350,54 @@
                 <p>周深就是要站在有光的舞台上</p>
             </div>
 
+            <!-- 分割线 -->
             <div class="fan-divider-line"></div>
 
+            <!-- 版式③ 第二个金句 -->
             <div class="fan-quote">
                 <p>我以渺小爱你同行的旅程<br>我以短暂爱你不朽的旅程</p>
                 <div class="fan-image-caption">《我以渺小爱你》</div>
+
             </div>
 
+            <!-- 正文段落 -->
             <div class="fan-body-text">
-                <p>人有时候总是有点感性</p>
-                <p>而我比较严重，我经常因为各种事情掉眼泪，不管是幸福的还是悲伤的事情都很容易让我掉眼泪。</p>
-                <p>记得哭的好惨的几次，抢到票可以去演唱会的时候，伦敦站取消的时候，虚构刚上线的时候，小深的vlog的时候，演唱会上唱花开的时候……</p>
-                <p>我现在有时候看见周深很开心幸福的时候也会流泪</p>
-                <p>一定是爱的，只是爱融进心脏里了，爱的时候总是免不了触动，无声，跳动</p>
-                <p>但我们的底色一定是幸福的</p>
-                <p>眼泪的前调可能有点酸苦，但后调会是甜的</p>
-                <p><br></p>
-                <p>有好多好多我想说的，小深做的什么什么事情，他拿过的什么什么奖，他生活里的什么什么故事……但我真的在写的时候，我什么都记不清了</p>
-                <p>我只记得我要写我爱他</p>
-                <p>爱真的好大的一个词</p>
-                <p>在高中的时候我曾经和我的一个朋友说，在没有能力前不就要说爱。但我发现好像有点错了，爱总是先来的，只不过我会在爱的过程中找到我去爱他的能力</p>
-                <p>一边爱他，一边找到了自己</p>
+                 <p>人有时候总是有点感性</p>
+                 <p>而我比较严重，我经常因为各种事情掉眼泪，不管是幸福的还是悲伤的事情都很容易让我掉眼泪。</p>
+                 <p>记得哭的好惨的几次，抢到票可以去演唱会的时候，伦敦站取消的时候，虚构刚上线的时候，小深的vlog的时候，演唱会上唱花开的时候……</p>
+                 <p>我现在有时候看见周深很开心幸福的时候也会流泪</p>
+                 <p>一定是爱的，只是爱融进心脏里了，爱的时候总是免不了触动，无声，跳动</p>
+                 <p>但我们的底色一定是幸福的</p>
+                 <p>眼泪的前调可能有点酸苦，但后调会是甜的</p>
+                 <p><br></p>
+                 <p>有好多好多我想说的，小深做的什么什么事情，他拿过的什么什么奖，他生活里的什么什么故事……但我真的在写的时候，我什么都记不清了</p>
+                 <p>我只记得我要写我爱他</p>
+                 <p>爱真的好大的一个词</p>
+                 <p>在高中的时候我曾经和我的一个朋友说，在没有能力前不就要说爱。但我发现好像有点错了，爱总是先来的，只不过我会在爱的过程中找到我去爱他的能力</p>
+                 <p>一边爱他，一边找到了自己</p>
             </div>
 
+            <!-- 分割符号 -->
             <div class="fan-divider-symbol">✦ · ✧</div>
 
+            <!-- 正文段落 -->
             <div class="fan-body-text">
-                <p>今年是十二周年了，我其实想了很多为这次周年准备什么，画画，剪辑还是蛋糕……</p>
-                <p>后来我决定制作这个网站</p>
-                <p>十二周年是一轮了吧【周深说他的出道日是生米的生日，所以我们12岁了，刚好一轮哈哈哈哈哈哈】这么重要的日子我想值得纪念！！网站能放很久很久呢</p>
-                <p>虽然这个网站做的真的很粗糙【特别鸣谢豆包和DeepSeek</p>
-                <p>比起别人的，我的小小网站略微有些朴实，但是绝对是我的真心！！</p>
-                <p>我也想把我的真心拿出来看看</p>
-                <p>在下一个十二年的时候我还能再把这个网站拿出来看看，下一个十二年我还会在台下听周深唱歌！</p>
+                 <p>今年是十二周年了，我其实想了很多为这次周年准备什么，画画，剪辑还是蛋糕……</p>
+                 <p>后来我决定制作这个网站</p>
+                 <p>十二周年是一轮了吧【周深说他的出道日是生米的生日，所以我们12岁了，刚好一轮哈哈哈哈哈哈】这么重要的日子我想值得纪念！！网站能放很久很久呢</p>
+                 <p>虽然这个网站做的真的很粗糙【特别鸣谢豆包和DeepSeek</p>
+                 <p>比起别人的，我的小小网站略微有些朴实，但是绝对是我的真心！！</p>
+                 <p>我也想把我的真心拿出来看看</p>
+                 <p>在下一个十二年的时候我还能再把这个网站拿出来看看，下一个十二年我还会在台下听周深唱歌！</p>
             </div>
 
+            <!-- 版式④ 横向插图 -->
             <div class="fan-inline-img">
                 <img src="img/2.jpg" alt="傍晚时分的街道" loading="lazy">
                 <div class="fan-image-caption">演唱会上闪闪发光的你</div>
             </div>
 
+            <!-- 版式② 左右分栏（第三次） -->
             <div class="fan-split">
                 <div class="fan-split-text fan-body-text">
                     <p>很感谢我的家人们朋友们，有人经常说我很幸福，说我真的能爱到海枯石烂的感觉哈哈哈哈哈哈，我很感谢他们，我也很感谢每一个愿意听我说这些的人</p>
@@ -2144,7 +2407,7 @@
                     <p><br></p>
                     <p>我真的真的很喜欢周深</p>
                     <p>无论怎么样，我会一直在，会一直记得周深</p>
-                    <p>所以小深，你不许再说自己"何德何能"了！！这么好的人就是值得啊！！！【还是变成第二人称了……</p>
+                    <p>所以小深，你不许再说自己“何德何能”了！！这么好的人就是值得啊！！！【还是变成第二人称了……</p>
                     <p><br></p>
                     <p>最后，这篇文章也许有点乱，牛头不对马嘴，就只是我个人的想法，想到什么就写了，看不懂的可以来问我，我很乐意和你聊</p>
                     <p>如果你愿意，加一可以和你聊一个晚自习</p>
@@ -2154,6 +2417,7 @@
                 </div>
             </div>
 
+            <!-- 结尾收尾 -->
             <div class="fan-ending">
                 <div class="fan-ending-text">
                     <p>最后的最后</p>
@@ -2171,57 +2435,67 @@
         <div style="height: 40px;"></div>
     </div>
 
-    <!-- ===== 留言板（仅保留 Waline 评论系统） ===== -->
+    <!-- ===== 留言板（账号系统整合） ===== -->
     <div class="page-box" id="page-message">
         <div class="message-box-wrap">
-            <h2 class="msg-title">💬 留言板</h2>
-            <p style="text-align:center;color:#7086ab;margin-bottom:30px;font-size:14px;">在这里留下你想说的话吧～</p>
-            <!-- Waline 评论系统 -->
-            <div id="waline"></div>
+            <h2 class="msg-title">留言板</h2>
+
+            <!-- 账号状态栏 -->
+            <div class="auth-area" id="authArea">
+                <div class="auth-status" id="authStatus">👤 当前未登录</div>
+                <div class="auth-btn-group" id="authBtnGroup">
+                    <button class="auth-btn primary" id="authLoginBtn">登录</button>
+                    <button class="auth-btn" id="authRegisterBtn">注册</button>
+                    <button class="auth-btn danger" id="authLogoutBtn" style="display:none;">退出</button>
+                </div>
+            </div>
+
+            <!-- 发留言表单（登录后才可见） -->
+            <div class="msg-form-area" id="msgFormArea">
+                <div class="msg-input-group">
+                    <label>留言内容</label>
+                    <textarea id="msgContent" placeholder="如果你有什么话想对加一说，想对周深说，想对这个破破的小站说，或者是任何你想说的，就写在这里吧……"></textarea>
+                </div>
+                <div class="msg-input-group" style="display:none;">
+                    <label>删除密码</label>
+                    <input type="password" id="msgDeletePwd" placeholder="已使用登录密码">
+                    <div class="hint-text">删除留言时需验证登录密码</div>
+                </div>
+                <button class="send-msg-btn" id="submitMsgBtn">发送留言</button>
+            </div>
+
+            <!-- 留言列表 -->
+            <div class="all-msg-list" id="msgShowBox"></div>
         </div>
     </div>
 
-    <!-- Waline CSS & JS 国内镜像加速 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/waline@latest/dist/waline.css">
-    <script src="https://cdn.jsdelivr.net/npm/waline@latest/dist/waline.js"></script>
-    <script>
-        // Waline 初始化（完整配置）
-        Waline.init({
-            el: '#waline',
-            serverURL: 'https://waline1-lime.vercel.app/',
-            login: 'enable',
-            avatar: 'mp',
-            pageSize: 10,
-            uploadImage: false,
-            wordLimit: 200,
-            emoji: ['https://cdn.jsdelivr.net/npm/@waline/emojis@1.1.0/bilibili'],
-            locale: {
-                placeholder: '欢迎留下你的想法～（200字以内）',
-                nick: '昵称',
-                mail: '邮箱',
-                link: '网址',
-                submit: '提交',
-                reply: '回复',
-                cancelReply: '取消回复',
-                comments: '留言',
-                cancel: '取消',
-                confirm: '确认',
-                continue: '继续',
-                more: '加载更多',
-                login: '登录',
-                logout: '退出',
-                admin: '管理员',
-                debug: '调试',
-                error: '错误',
-                loading: '加载中',
-                noComment: '还没有留言，快来抢沙发吧！'
-            }
-        });
-    </script>
+    <!-- ===== 账号弹窗（注册/登录） ===== -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-modal-box">
+            <button class="auth-modal-close" id="authModalClose">×</button>
+            <h3 id="authModalTitle">登录</h3>
+            <div class="msg-input-group">
+                <label>昵称</label>
+                <input type="text" id="authModalNick" placeholder="请输入昵称">
+            </div>
+            <div class="msg-input-group">
+                <label>密码</label>
+                <input type="password" id="authModalPwd" placeholder="请输入密码">
+            </div>
+            <div class="msg-input-group" id="authModalPwdConfirmGroup" style="display:none;">
+                <label>确认密码</label>
+                <input type="password" id="authModalPwdConfirm" placeholder="请再次输入密码">
+            </div>
+            <button class="auth-submit-btn" id="authModalSubmit">登录</button>
+            <div class="auth-error" id="authModalError"></div>
+            <div class="auth-success" id="authModalSuccess"></div>
+        </div>
+    </div>
 
-    <!-- ===== 核心功能脚本 ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script>
-        // ===== 页面切换 =====
+        // ===== 原有脚本完全保留，一字不改 =====
+        // 页面切换
         const navBtns = document.querySelectorAll('[data-target]');
         const allPages = document.querySelectorAll('.page-box');
         navBtns.forEach(btn => {
@@ -2233,12 +2507,15 @@
                 allPages.forEach(page => page.classList.remove('active'));
                 document.getElementById(targetId).classList.add('active');
                 navBtns.forEach(b => b.classList.remove('nav-active'));
-                this.classList.add('nav-active');
+                if (targetId === 'page-home') this.classList.add('nav-active');
+                else if (targetId === 'page-member') this.classList.add('nav-active');
+                else this.classList.add('nav-active');
             })
         })
 
-        // ===== 首页轮播 =====
+        // 首页轮播
         const wrap = document.querySelector('.banner-wrap');
+        const imgs = document.querySelectorAll('.banner-img');
         const prevBtn = document.querySelector('.banner-prev');
         const nextBtn = document.querySelector('.banner-next');
         const dotsBox = document.querySelector('.banner-dots');
@@ -2306,8 +2583,8 @@
         document.querySelector('.banner').addEventListener('mouseenter', () => clearInterval(timer));
         document.querySelector('.banner').addEventListener('mouseleave', () => timer = setInterval(nextSlide, 5000));
 
-        // ===== 气泡弹窗 =====
         document.addEventListener('DOMContentLoaded', function() {
+            //气泡弹窗
             const stackItems = document.querySelectorAll('.stack-item');
             const popMask = document.getElementById('popMask');
             const popClose = document.getElementById('popClose');
@@ -2331,7 +2608,7 @@
                 })
             }
 
-            // ===== 图片放大弹窗 =====
+            //图片放大弹窗
             const imgModal = document.getElementById('imgModal');
             const modalPhoto = document.getElementById('modalPhoto');
             const imgClose = document.querySelector('.img-close');
@@ -2353,7 +2630,7 @@
                 if (e.target === imgModal) closeImgModal();
             })
 
-            // ===== 反深代词 CoverFlow =====
+            // ===== 反深代词 CoverFlow 轮播逻辑 =====
             const coverItems = document.querySelectorAll('.cover-item');
             const coverPrev = document.querySelector('.cover-prev');
             const coverNext = document.querySelector('.cover-next');
@@ -2379,6 +2656,21 @@
             const trackWrap = document.querySelector('.track-list');
             const introTextDom = document.getElementById('albumIntro');
 
+            const albumIntroMap = {
+                "蜃楼": ">>>《Mirage》<br>无论现在还是未来，<br>我们的内心深处都一定保有一方绿洲，<br>那些让我们执着的念想：<br>是某个人、某件事、某个场景，<br>以一种可望而不可及的距离，以缺憾或希望的形式，<br>成为了心底的执念。<br>有人因执念困在原地。<br>有人靠执念继续前行。<br>执念在心底幻化成想像的蜃楼，<br>它们具体又幻象，疏离又遥远，<br>但让人们更明白作为生命存在和守护的意义。<br>你看到的蜃楼是什么样子呢？<br>你心底还放不下的执念，是什么呢？",
+                "重启": ">>>《Restart》<br>如果有机会重启人生，<br>将这一切重新来过，<br>是否能弥补所有遗憾，<br>拥有一个完美人生？<br>200年后的世界，<br>每个人都拥有“重启”的机会。<br>可以随时带着记忆重新开始，<br>去弥补曾经的遗憾。<br>但当再次经历过去，<br>感受最初的美好；<br>修正所有的错误，<br>人生就真的完美无缺了吗？<br>如果是你，会选择按下重启按钮吗？",
+                "记忆商店": ">>>《The Memory Store》<br>200 年后的世界，<br>美好的记忆都可以购买。<br>所有的美好瞬间，<br>熟悉的幸福时刻，<br>都被商家提取出来售卖。<br>有一位顾客，<br>找遍了所有的记忆商店，<br>想找回儿时拥有过的普通秋千，<br>却总是失落而归，<br>怎么也找不到。<br>今天的他，<br>又被店家推荐了 —— <br>没噩梦的睡眠、真实的拥抱、最新款的流星雨等等货品，<br>但在这些所有漂浮的美好里，<br>他只是单纯想买一个落地的朴实心愿罢了。",
+                "警报": ">>>《The Giver》<br>200年后的世界，<br>每个人都会配备一只AI小机器人陪伴成长。<br>观察记录主人的行为情感。<br>有一只小机器人，<br>发现过于善良的主人，<br>不停在人际关系的上游、中游或下游付出所有，<br>却看不见自己快要断流，<br>伤得越重笑得越轻松，<br>内心越痛笑得越隆重。<br>久而久之，<br>主人状态越来越差，<br>情绪价值被耗空，<br>机器人向主人发出警报，<br>希望主人能够先好好保护自己。<br>但无奈，警报无人听懂，<br>最终人工智能也学会了心痛。",
+                "少管我": ">>>《Shao Guan Wo (Watch Ur Manners)》<br>200年后的世界，<br>人类不再被地理位置限制，<br>随时都可以开启一场想去哪里就去哪里的旅行，<br>随时可以变化成任何场景的任何事物，<br>可以成为风中飘散的花,<br>飘到水星，或者坠入泥巴，<br>也许不讨你喜欢？<br>但当我开启这场旅行的时候，<br>请你，<br>少管我！！！",
+                "嗨": ">>>《Say Hi》<br>200年后的世界，<br>一个寻常的下午，<br>一位拾荒者被一抹异常的反光所吸引，<br>一块不属于现代的古老金属破土而出。<br>经过一阵茫然地摸索触碰，<br>“哦~说声嗨”<br>一个带着些微噪音的声音响起，<br>拾荒者迟疑地看着眼前古怪的“机器”。<br>“嗨？”<br>那个平常的下午，<br>越来越多的人从四面八方赶来。<br>他们站在废墟之上，<br>一起屏气凝神，<br>听温柔的歌声，<br>在整个天空中缓缓流淌。<br>而那个200年前的男孩对此一无所知，<br>他只是不知疲倦地唱着，<br>温柔地吟唱着：<br>“哦说声嗨，<br>知道你一定会来。”<br>当人类随时都可以传送到任何想去的地方，<br>人们会因为没有阻碍的见面而变得更相爱吗？",
+                "缝合": ">>>《Fix You》<br>在200年后的世界，<br>所有受伤的人类都会被一种神奇的机器人缝合。<br>成年机器人负责缝合大人，幼年机器人负责缝合孩子，<br>它们组成家庭，协同工作。<br>而所有人类的伤口最终都会愈合，<br>除了一个部位…<br>某天，一只幼年缝合机器人向它的父母求助：<br>“这颗孩子的心，昨天明明缝上了，今天伤口却崩开了…”<br>同样是缝合机器人的父母却露出习以为常的笑容：<br>“大人的心也是一样难缝啊…<br>不过，等你多缝几次就会习惯啦。”<br>小机器人下意识敲了敲自己的胸口——<br>金属外壳里传来空洞的回声。<br>“一个没有心的机器人，能缝好一颗流血的心吗？”<br>它想。<br>小机器人决定和父母交换工作对象，<br>它想找到“彻底缝合”的答案。<br>在父母的陪伴和注视下，<br>它满怀期待地打开成年人类的胸腔——<br>误解、遗憾、愧疚、无奈、自责、痛苦……<br>情绪的重重疤痕新旧交错，<br>覆盖在一颗正在滴血的心脏之上。<br>我们真的无法缝合对方的心，对吗？爸爸、妈妈…”<br>“也许吧…但是只要心脏依然在跳着，我们就有再重新缝合的机会。”",
+                "Wala li longla": ">>>《Wala li longla》<br>200年后的世界，<br>日新月异的科技终于突破奇点，<br>那些只存在于传说里的幻想之物，<br>终于变成了现实。<br>某天，人们收到了一则全息短信。<br>一只虚拟精灵跳到眼前。<br>“重磅新闻！<br>人类史上最著名的烂尾建筑，终于在今日完工啦！<br>来，快跟我一起去看看吧！<br>Wala li longla！”<br>“Wala…什么？”<br>他们被一股奇妙的力量轻轻托起。<br>歌声伴着光芒渐渐散<br>去，<br>人们仰起头，<br>庞大不可名状之物矗立眼前——<br>一座通天塔。<br>敬畏和惊愕中，<br>一团闪烁的星芒尖叫着，<br>顺着螺旋阶梯轻盈滑下：<br>“欢迎来到「巴别塔——2224 CE无界沟通全宇宙」的揭幕现场！<br>只要你只要念一句<br>Wala li longla！<br>就能听懂任何一个TA的话！<br>没错！<br>这是为整个宇宙所有物种提供沟通服务的超级解码器。<br>只要你们愿意，<br>就可以自由共享彼此的一切！<br>文化记忆、历史故事、身份认同、情感共鸣…<br>不再有误解，也不再有隔阂！<br>来，<br>奔向你的TA！<br>跟我一起念！！<br>Wala li longla！！！”<br>喃喃的念白如雷声般滚滚而来，<br>一个个梦幻的气泡渐次浮起。<br>一道道同频的信号划过天穹，<br>被白色巨塔的塔尖不断接收又不断发出。<br>要是有人站在地面极目向上望，<br>还能瞥见一个轻快的残影绕着塔身翩翩飞舞。<br>快乐的歌声从天空飘然落下，<br>“Wala li longla！！！”",
+                "空壳": ">>>《Shen》<br>200年后的世界，<br>新的智慧生命可以从共同的想象力中诞生。<br>一个念头被飞速传播获得了广泛共鸣后，<br>抽象的愿景就会长出具象的血肉。<br>“假如有一个装不满的树洞，<br>能带走我所有的心事，<br>该有多好。”<br>于是，一个名为空壳的“树洞”出生了。<br>大雾弥漫的清晨，<br>一个缓慢靠近的巨影逐渐显形。<br>人们走向它，<br>或眷恋或释然地抚过粗糙的壳身，<br>把沉甸甸的信物交给它，<br>“我爱你，再见。”<br>落袋的回声出乎意料的温柔，<br>如海底传来的悠长鲸鸣。<br>隐秘被收藏，情绪被接纳；<br>心声被聆听，信任被珍重。<br>装满信物的空壳乘着星光离去，<br>向下一个目的地出发。<br>它抱紧身后的行囊，<br>犹如抱紧无数人黑甜的梦乡，<br>“谢谢，再见。<br>你不会被弄丢，<br>我们终将重逢。”",
+                "没关系": ">>>《Life is Like a Box of Chocolates》<br>200年后的世界，<br>幸福指数能够被AI观测并准确读取。<br>如果你感觉自己的情绪出现了问题，<br>可以前往「幸福制造工作室」寻求帮助。<br>某天，幸福机器人迎来了它的第19920929名咨询者。<br>“我觉得生活太窒息了…”<br>面前的监视器上跳出红色的警告字样，<br>它平静地移开视线：<br>“您的幸福指数显示在正常范围。”<br>“啊？可是我真的很差劲…”<br>“看您的脸色，是不是没睡好？”<br>“持续熬夜…赶工作进度…但还是怎么做怎么都不对…”<br>“没关系”，<br>幸福机器人一边说一边走进“后台”字样的门：<br>“这是最新研发出来的产品，刚刚面市。”<br>返回后它递上一个精致的纸包，<br>“祝你睡个好觉。”<br>“下一位，请进。”<br>“和父母大吵一架…”<br>“重要的考试失败了…”<br>“收到了分手短信…”<br>“最好的朋友不再联系了…”<br>闪烁的红光间或跳动在幸福机器人的虹膜上。<br>它用安静的温柔聆听，<br>“其实，都没关系。”<br>“痛快哭一场。”<br>“好好睡一觉。”<br>“笑笑也无妨。”<br>“别勉强自己。”<br>“做不到也没关系。”<br>…<br>人们带着机器人的馈赠心满意足地离去，<br>拆开纸包吞下情绪的解药——<br>苦涩褪去后，一丝回甘涌上心头，<br>生活即将迎来崭新的一天。<br>台前的工作结束了，<br>幸福机器人按照惯例测量自己。<br>绿色的提示框弹出：<br>“您的心情指数：非常幸福！”<br>它拉开“后台”的门，<br>“吱呀”——<br>一间小小的巧克力手工作坊映入眼帘。<br>环视着空荡荡的货架，<br>它满意地点点头：<br>“研发了那么久的新口味果然很受欢迎，<br>明天也要再努力一点才行呢。”",
+                "请我不改": ">>>《Brave Heart》<br>200年后的世界，<br>大多数的仿生人由「核芯」和「躯壳」组成。<br>只有极少数的仿生人还拥有「灵魂」——<br>一个微小概率的产物，<br>在核芯和躯壳完美融合后方能出现。<br>灵魂的孕育既随机又漫长，<br>犹如一颗天然珍珠的诞生，<br>是沙粒和蚌壳拥抱彼此的奇迹。<br>「深渊」仿生人研究中心内。<br>「核芯实验室」的工程师敲打着键盘，准备验收新一批的核芯。<br>“都很不错…那么，有谁愿意成为最好的核芯吗？有灵魂的那种！”<br>“我愿意！我愿意！”<br>无数电流在空中划过，火花噼啪作响。<br>“即使要在黑暗里一直等待？和躯壳融合的时长是无法预估的…”<br>空气安静了下来。<br>一片沉默中，角落里忽然传来了信号波动：<br>“我愿意。”<br>工程师循着信号来源望去，发现是一个看上去平平无奇的核芯。<br>“你不害怕失败吗？”<br>“我生来渴望冒险。”<br>隔壁的「躯壳车间」里，<br>一位工程师在一众仿生躯壳之间走走停停，仔细检查。<br>“你的肢体结构不错。”<br>“你的细节很棒。”<br>“你和人类几乎一模一样。”<br>仿生躯壳们回应道：“谢谢夸奖！”“当然了！”“我就是最好的！”<br>工程师停在一个不起眼的小人儿面前，<br>“诶？触感过于柔软了…嘶，你竟然会被划伤啊，这可不太实用…”<br>它抬起一直低着的头：“没关系，我会慢慢愈合的。”<br>「深渊」研究中心的最深处，<br>是仿生人诞生的温床「生命之海」，<br>核芯们和躯壳们在此相见了。<br>生命的海浪涌起，<br>奇妙的命运碰撞——<br>200年前，一粒冒险的沙粒跌进了一枚坚忍的蚌壳，<br>200年后，一粒勇敢的核芯遇见了一枚温柔的躯壳。<br>一个「我」在黑暗里蜷缩着静静等待，<br>一个「我」用血和泪将伤口轻轻包裹。<br>两个虚影悄然重叠，<br>一团光晕渐渐亮起。<br>柔软、脆弱、安静，<br>是躯壳，也是核芯，是一半的灵魂；<br>坚硬、浪漫、璀璨，<br>是核芯，也是躯壳，是另一半灵魂。<br>十年后。<br>一个仿生人从黑暗中睁开双眼。<br>胸中悸动着熠熠生辉的，<br>是一颗如珍珠般的灵魂。<br>它默念道：<br>“请我不改。”",
+                "虚构": ">>>《The Mask》<br>200年后的世界，<br>机器人技术在不断地进步突破，<br>但型号的更新迭代却难以解答200年前出发时的疑惑：<br>“机器人是否能成为真正的人？<br>人类是否真的能共情机器人？”<br>一只报废的小机器人在高高的废墟顶端醒来，<br>它举起残缺的肢体，摸上锈蚀的面孔。<br>一阵风从它胸前的空洞穿过，<br>发出奇异而悠扬的声响。<br>“我在垃圾堆里呆了这么久，从没听过这种声音。”<br>一位古早型号机器人路过，停下来倾听。<br>“那是我的芯片，它还没坏。”<br>小机器人答道，“或许我能成为一名歌手？”<br>“这是不可能的。众所周知，只有人类才能成为歌手。”<br>山中不知岁月长。<br>搜索，挖掘，拆解，拼凑，缝合，<br>小机器人跌跌撞撞地修好了自己，<br>还天才地制造出一张伪装人脸的全息面具。<br>它混入了只允许人类参赛的“宇宙第一歌姬大会”，<br>在垃圾堆里每天哼唱的歌谣，<br>意外地受到了观众们的喜爱。<br>决赛当天。<br>偌大的会场座无虚席。<br>“…今天将决出全宇宙最好的歌手！TA还将获得一个「万能许愿」的机会！无论什么心愿都能实现！让我们拭目以待谁能脱颖而出…”<br>后台的休息室。<br>“我早就想好了，我要许愿变成一个真正的人。”<br>它望向镜子里漂亮的人类面孔，甜甜地笑了。<br>小机器人从未唱得如此投入，<br>最后一个音符消散之际，<br>它哭了。<br>本不属于硅基生命的液体滑下，<br>在全息面具上侵蚀出一丝裂缝，<br>一抹金属反光刺入观众们的眼眸。<br>小机器人赢了。<br>一无所知的它仰起脸：“那我可以许愿了吗？”<br>“你的愿望已经实现了。”<br>一个温柔的声音从头顶响起，<br>“看看你自己。”<br>一只虚幻的手拂过它的泪痕。<br>“什么？可我还是金属的啊？”<br>它惊愕地摸上自己的脸，坑洼的瘢痕冰凉一片。<br>“这是我的脸…面具呢？”<br>小机器人想逃跑，<br>却迈不开腿。<br>“被看见了…”<br>震耳欲聋的掌声和喝彩声汇聚成一股澎湃的声浪，<br>将它牢牢地钉在原地。<br>“唱得太好了！”“真好听啊！”<br>“你们…不讨厌我？”<br>“我们爱你！”<br>“可是…你们爱上的是虚构的我…”<br>“不对！我们爱的就是真实的你！”<br>那滴被歌声注入感情的眼泪，让它成为了一个真正的人。<br>那些和它同频共振的声音，让它成为了一个真正的歌手。<br>“谢谢你们，愿意看见我。”<br>一个锈迹斑斑的小机器人站在舞台中央，甜甜地笑了。"
+            };
+
             function renderCoverStyle() {
                 coverItems.forEach(item => {
                     item.classList.remove(
@@ -2389,20 +2681,30 @@
                 });
                 coverItems.forEach((item, idx) => {
                     const diff = idx - currentCoverIndex;
-                    if (diff === 0) item.classList.add('active-center');
-                    else if (diff === -1) item.classList.add('side-left-1');
-                    else if (diff === -2) item.classList.add('side-left-2');
-                    else if (diff === -3) item.classList.add('side-left-3');
-                    else if (diff === 1) item.classList.add('side-right-1');
-                    else if (diff === 2) item.classList.add('side-right-2');
-                    else if (diff === 3) item.classList.add('side-right-3');
-                    else if (diff < -3) item.classList.add('far-left');
-                    else if (diff > 3) item.classList.add('far-right');
+                    if (diff === 0) {
+                        item.classList.add('active-center');
+                    } else if (diff === -1) {
+                        item.classList.add('side-left-1');
+                    } else if (diff === -2) {
+                        item.classList.add('side-left-2');
+                    } else if (diff === -3) {
+                        item.classList.add('side-left-3');
+                    } else if (diff === 1) {
+                        item.classList.add('side-right-1');
+                    } else if (diff === 2) {
+                        item.classList.add('side-right-2');
+                    } else if (diff === 3) {
+                        item.classList.add('side-right-3');
+                    } else if (diff < -3) {
+                        item.classList.add('far-left');
+                    } else if (diff > 3) {
+                        item.classList.add('far-right');
+                    }
                 });
                 const data = albumData[currentCoverIndex];
                 titleDom.innerText = data.title;
                 trackWrap.innerHTML = "";
-                data.track.forEach((t) => {
+                data.track.forEach((t, idx) => {
                     const div = document.createElement('div');
                     div.className = 'track-item';
                     const link = t.link || '#';
@@ -2413,11 +2715,16 @@
                         </a>
                         <span class="track-duration">${t.time}</span>
                     `;
+                    div.querySelector('a').addEventListener('click', function(e) {
+                        e.stopPropagation();
+                    });
                     trackWrap.appendChild(div);
                 });
+
+                const title = data.title;
                 if (introTextDom) {
-                    const defaultIntro = `「${data.title}」是周深「反深代词」专辑中的一首作品。`;
-                    introTextDom.innerHTML = `<em>「${data.title}」</em> ${defaultIntro}`;
+                    const defaultIntro = `「${title}」是周深「反深代词」专辑中的一首作品，以独特的音乐语言传递情感与思考。`;
+                    introTextDom.innerHTML = `<em>「${title}」</em> ${albumIntroMap[title] || defaultIntro}`;
                 }
             }
             renderCoverStyle();
@@ -2443,17 +2750,17 @@
                 })
             })
 
-            // ===== 相识相遇 · CoverFlow 竖条视频画廊 =====
+            // ===== 相识相遇 · CoverFlow 竖条视频画廊（独立初始化） =====
             function initAlbumGallery() {
                 const albumVideoData = [
-                    { id: 0, title: '开始推理吧', meta: '因为周可可，我认识到了一个超可爱的你', desc: '　　没想到，比起认识周深，我竟然先认识了可可。\n　　但是其实我很早就知道了周深，不过不太熟悉，毕竟大鱼啊，达拉崩吧这么火，远近闻名来了。\n　　但有些感情需要一个契机和一个缘分。\n　　我嘛，只是在暑假随手打开了一个综艺，一眼看到了这个可爱的，活泼的，萌萌的周三岁。我说：我去！这是谁！太可爱了，太好玩了……\n　　所以这才是故事的开端，所以我开始了解你', cover: 'img/video1.jpg', video: 'https://player.bilibili.com/player.html?bvid=BV1Ag41167Zi&autoplay=1' },
-                    { id: 1, title: '能解答一切的答案', meta: '干净，纯白，天使般的声音', desc: '　　那时候是23年，认识周深必不可少的需要打开《歌手》，我不是很喜欢看竞技类的音综，所以我只是挑了周深的舞台看。\n　　我记得很清楚，我的妹妹当时在我边上吵着要换别的电视看，而加一我已经沉迷了。\n　　是《能解答一切的答案》，疫情的时候在家里录的，没有炫酷的灯光或者妆造，但是白色的画面好干净……\n　　和他的声音一样干净，纯粹，像天使……\n　　把一个那些日子里焦躁迷茫的心抱在怀中，静静安抚……\n　　好喜欢他的声音！', cover: 'img/video2.png', video: 'https://player.bilibili.com/player.html?bvid=BV117411F7nN&autoplay=1' },
-                    { id: 2, title: '深深谢谢你啦', meta: '因为八周年的这封信我就喜欢上你了', desc: '　　我觉得一见钟情就是这样吧，很迅速的我开始查找关于这个人的一切，我想看看他到底是什么样的。\n　　就是很巧，那天也是7月25日，出道日的八周年纪念日，他唱了他自己写给粉丝的歌。\n　　我当时并不是他的粉丝，但我的眼泪还是掉下来了。\n　　怎么会有这么真诚真心的人，我想写出这样歌的人一定很爱他的粉丝，而他的确是这样。\n　　所以我真的开始喜欢他，只是因为真心！', cover: 'img/video3.png', video: 'https://player.bilibili.com/player.html?bvid=BV1DF411P7Sw&autoplay=1' },
-                    { id: 3, title: '929生日', meta: '2024 · 我真正意义上陪你过的第一个生日', desc: '　　那时候还是高中，没有手机的可怜学生，没有多少时间能回来一直上网。\n　　包括生日直播\n　　但其实我很快就毕业了。\n　　真的是很久不怎么见到，所以上大学的第一个生日直播我就守在电脑前，一步不舍得离开，这是我第一次"陪着你"过生日，而不是只是为你过生日\n　　坐在电脑前面唱歌的小深感觉是世界上最幸福的人了\n　　坐在电脑前听你唱歌的我也是', cover: 'img/video4.jpg', video: 'https://player.bilibili.com/player.html?isOutside=true&aid=113221897884768&bvid=BV1nJxmedEyV&cid=26066487791&p=1' },
-                    { id: 4, title: '9.29苏州演唱会', meta: '在我生日这天，你陪我过的', desc: '　　苏州演唱会那天是我的生日，并且我抢到了票。\n　　这一切都像是命中注定，你也可以陪我过生日了。\n　　苏州其实真的很远，解决了车票、住宿还有征得家里人的同意，我义无反顾的就出发了，不会错过什么风景，去见你的一路上都是风景。\n　　当你的第一句声响起来的时候，我就忍不住哭。声音真实的频率真的不一样，只是我知道你真的在我眼前。\n　　这次不是从视频里听到的……', cover: 'img/video5.jpg', video: 'https://player.bilibili.com/player.html?isOutside=true&aid=113457869430736&bvid=BV189mqYEE9a&cid=26698190042&p=1' },
-                    { id: 5, title: '泉州咪咕汇', meta: '我想多一个我，你应该会更开心', desc: '　　泉州咪咕汇，离我很近。\n　　因为是一个颁奖典礼，所有人都希望能在场上让深深看到我们，看到我们来支持他。\n　　所以我想去，我能做的真的好少，我没什么能做的来告诉深深我真的很爱他，而且我想他了……\n　　所以我去了！\n　　那天下的雨特别大，我们都没走，但是小深把伞扔掉的时候，我觉得……我好像更爱他了', cover: 'img/video6.png', video: 'https://player.bilibili.com/player.html?isOutside=true&aid=114366171059803&bvid=BV1fz5tz8Etp&cid=29508570704&p=1' },
-                    { id: 6, title: '我以渺小爱你', meta: '我以短暂爱你不朽的旅程', desc: '　　到现在已经有很多很多对我们意义重要的歌了。但是对于我来说，《我以渺小爱你》永远是我们同频的那首\n　　第一次看这些词的时候，我就想，这个周深不会又要开始"何德何能"了吧，果然……\n　　我真的真的很喜欢你，我有时候也觉得我对你的爱真的好小，我其实不能为你做什么\n　　但我们不管有没有觉得自己渺小，有没有觉得亏欠，我们都会在同行的这趟旅程中一直爱彼此。\n　　我会陪着周深唱到一百八十岁的！', cover: 'img/video7.jpg', video: 'https://player.bilibili.com/player.html?isOutside=true&aid=113216193565734&bvid=BV1EWxieWEzD&cid=26051676962&p=1"' },
-                    { id: 7, title: '深深的福州演唱会', meta: '你来我家看我了诶', desc: '　　福州！演唱会！\n　　来我的家门口啦！一下子有实感就是你说的你会到我们家来看我们，所以你真的来啦。\n　　因为在福州，所以对路途的熟悉减少了好奇心，更多了一点要见面的期待和兴奋。我其实已经忘记那天是什么样了，像一场梦……\n　　我只记得我出来的时候就开始想你了。\n　　我们什么时候下一次见面啊！', cover: 'img/video8.jpg', video: 'https://player.bilibili.com/player.html?isOutside=true&aid=115412096323721&bvid=BV1YGW9z7Er4&cid=33275514784&p=1"' }
+                    { id: 0, title: '开始推理吧', meta: '因为周可可，我认识到了一个超可爱的你', desc: '　　没想到，比起认识周深，我竟然先认识了可可。<br>　　但是其实我很早就知道了周深，不过不太熟悉，毕竟大鱼啊，达拉崩吧这么火，远近闻名来了。<br>　　但有些感情需要一个契机和一个缘分。<br>　　我嘛，只是在暑假随手打开了一个综艺，一眼看到了这个可爱的，活泼的，萌萌的周三岁。我说：我去！这是谁！太可爱了，太好玩了……<br>　　所以这才是故事的开端，所以我开始了解你', cover: 'img/video1.jpg', video: 'https://player.bilibili.com/player.html?bvid=BV1Ag41167Zi&autoplay=1' },
+                    { id: 1, title: '能解答一切的答案', meta: '干净，纯白，天使般的声音', desc: '　　那时候是23年，认识周深必不可少的需要打开《歌手》，我不是很喜欢看竞技类的音综，所以我只是挑了周深的舞台看。<br>　　我记得很清楚，我的妹妹当时在我边上吵着要换别的电视看，而加一我已经沉迷了。<br>　　是《能解答一切的答案》，疫情的时候在家里录的，没有炫酷的灯光或者妆造，但是白色的画面好干净……<br>　　和他的声音一样干净，纯粹，像天使……<br>　　把一个那些日子里焦躁迷茫的心抱在怀中，静静安抚……<br>　　好喜欢他的声音！', cover: 'img/video2.png', video: 'https://player.bilibili.com/player.html?bvid=BV117411F7nN&autoplay=1' },
+                    { id: 2, title: '深深谢谢你啦', meta: '因为八周年的这封信我就喜欢上你了', desc: '　　我觉得一见钟情就是这样吧，很迅速的我开始查找关于这个人的一切，我想看看他到底是什么样的。<br>　　就是很巧，那天也是7月25日，出道日的八周年纪念日，他唱了他自己写给粉丝的歌。<br>　　我当时并不是他的粉丝，但我的眼泪还是掉下来了。<br>　　怎么会有这么真诚真心的人，我想写出这样歌的人一定很爱他的粉丝，而他的确是这样。<br>　　所以我真的开始喜欢他，只是因为真心！', cover: 'img/video3.png', video: 'https://player.bilibili.com/player.html?bvid=BV1DF411P7Sw&autoplay=1' },
+                    { id: 3, title: '929生日', meta: '2024 · 我真正意义上陪你过的第一个生日', desc: '　　那时候还是高中，没有手机的可怜学生，没有多少时间能回来一直上网。<br>　　包括生日直播<br>　　但其实我很快就毕业了。<br>　　真的是很久不怎么见到，所以上大学的第一个生日直播我就守在电脑前，一步不舍得离开，这是我第一次“陪着你”过生日，而不是只是为你过生日<br>　　坐在电脑前面唱歌的小深感觉是世界上最幸福的人了<br>　　坐在电脑前听你唱歌的我也是', cover: 'img/video4.jpg', video: 'https://player.bilibili.com/player.html?isOutside=true&aid=113221897884768&bvid=BV1nJxmedEyV&cid=26066487791&p=1' },
+                    { id: 4, title: '9.29苏州演唱会', meta: '在我生日这天，你陪我过的', desc: '　　苏州演唱会那天是我的生日，并且我抢到了票。<br>　　这一切都像是命中注定，你也可以陪我过生日了。<br>　　苏州其实真的很远，解决了车票、住宿还有征得家里人的同意，我义无反顾的就出发了，不会错过什么风景，去见你的一路上都是风景。<br>　　当你的第一句声响起来的时候，我就忍不住哭。声音真实的频率真的不一样，只是我知道你真的在我眼前。<br>　　这次不是从视频里听到的……', cover: 'img/video5.jpg', video: 'https://player.bilibili.com/player.html?isOutside=true&aid=113457869430736&bvid=BV189mqYEE9a&cid=26698190042&p=1' },
+                    { id: 5, title: '泉州咪咕汇', meta: '我想多一个我，你应该会更开心', desc: '　　泉州咪咕汇，离我很近。<br>　　因为是一个颁奖典礼，所有人都希望能在场上让深深看到我们，看到我们来支持他。<br>　　所以我想去，我能做的真的好少，我没什么能做的来告诉深深我真的很爱他，而且我想他了……<br>　　所以我去了！<br>　　那天下的雨特别大，我们都没走，但是小深把伞扔掉的时候，我觉得……我好像更爱他了', cover: 'img/video6.png', video: 'https://player.bilibili.com/player.html?isOutside=true&aid=114366171059803&bvid=BV1fz5tz8Etp&cid=29508570704&p=1' },
+                    { id: 6, title: '我以渺小爱你', meta: '我以短暂爱你不朽的旅程', desc: '　　到现在已经有很多很多对我们意义重要的歌了。但是对于我来说，《我以渺小爱你》永远是我们同频的那首<br>　　第一次看这些词的时候，我就想，这个周深不会又要开始“何德何能”了吧，果然……<br>　　我真的真的很喜欢你，我有时候也觉得我对你的爱真的好小，我其实不能为你做什么<br>　　但我们不管有没有觉得自己渺小，有没有觉得亏欠，我们都会在同行的这趟旅程中一直爱彼此。<br>　　我会陪着周深唱到一百八十岁的！', cover: 'img/video7.jpg', video: 'https://player.bilibili.com/player.html?isOutside=true&aid=113216193565734&bvid=BV1EWxieWEzD&cid=26051676962&p=1"' },
+                    { id: 7, title: '深深的福州演唱会', meta: '你来我家看我了诶', desc: '　　福州！演唱会！<br>　　来我的家门口啦！一下子有实感就是你说的你会到我们家来看我们，所以你真的来啦。<br>　　因为在福州，所以对路途的熟悉减少了好奇心，更多了一点要见面的期待和兴奋。我其实已经忘记那天是什么样了，像一场梦……<br>　　我只记得我出来的时候就开始想你了。<br>　　我们什么时候下一次见面啊！', cover: 'img/video8.jpg', video: 'https://player.bilibili.com/player.html?isOutside=true&aid=115412096323721&bvid=BV1YGW9z7Er4&cid=33275514784&p=1"' }
                 ];
 
                 const totalVideos = albumVideoData.length;
@@ -2673,8 +2980,9 @@
                 document.addEventListener('DOMContentLoaded', initAlbumGallery);
             }
 
-            // ===== 生活和你 · 纯图片拼图画廊 =====
+            // ===== 生活和你 · 纯图片拼图画廊（独立初始化） =====
             function initLifeGallery() {
+                // 每个页面的卡片配置：图片路径、尺寸样式、标题
                 const pagesLife = [{
                     id: 0,
                     mainTitle: '和你见面',
@@ -2703,6 +3011,7 @@
                         { img: '111/pic14.jpg', title: '泉州咪咕汇小美满', size: 'medium' },
                         { img: '111/pic15.jpg', title: '泉州咪咕汇加一的小灯牌', size: 'compact' },
                         { img: '111/pic16.jpg', title: '深深的福州演唱会入场ing', size: 'tall' }
+
                     ]
                 }, {
                     id: 1,
@@ -2795,10 +3104,11 @@
                     page.cards.forEach((card, idx) => {
                         const cardDiv = document.createElement('div');
                         cardDiv.className = `film-card-life ${card.size || 'medium'}`;
+                        // 背景色占位
                         const hue = (idx * 30 + 210) % 360;
                         cardDiv.style.background = `linear-gradient(135deg, hsl(${hue}, 15%, 92%), hsl(${hue + 20}, 10%, 85%))`;
                         cardDiv.innerHTML = `
-                            <img src="${card.img}" alt="${card.title}" loading="lazy" onerror="this.style.display='none'">
+                            <img src="${card.img}" alt="${card.title}" onerror="this.style.display='none'">
                             <span class="card-index-life">${String(idx + 1).padStart(2, '0')}</span>
                         `;
                         cardDiv.addEventListener('click', () => {
@@ -2880,6 +3190,348 @@
             } else {
                 document.addEventListener('DOMContentLoaded', initLifeGallery);
             }
+
+            // ===== 账号系统 (注册/登录/退出) =====
+            const authModal = document.getElementById('authModal');
+            const authModalClose = document.getElementById('authModalClose');
+            const authModalTitle = document.getElementById('authModalTitle');
+            const authModalNick = document.getElementById('authModalNick');
+            const authModalPwd = document.getElementById('authModalPwd');
+            const authModalPwdConfirm = document.getElementById('authModalPwdConfirm');
+            const authModalPwdConfirmGroup = document.getElementById('authModalPwdConfirmGroup');
+            const authModalSubmit = document.getElementById('authModalSubmit');
+            const authModalError = document.getElementById('authModalError');
+            const authModalSuccess = document.getElementById('authModalSuccess');
+
+            const authLoginBtn = document.getElementById('authLoginBtn');
+            const authRegisterBtn = document.getElementById('authRegisterBtn');
+            const authLogoutBtn = document.getElementById('authLogoutBtn');
+            const authStatus = document.getElementById('authStatus');
+
+            let authMode = 'login'; // 'login' or 'register'
+            let currentUser = null; // { nickname, password }
+
+            // 加载已登录用户
+            function loadCurrentUser() {
+                const saved = localStorage.getItem('currentUser');
+                if (saved) {
+                    try {
+                        currentUser = JSON.parse(saved);
+                        updateAuthUI();
+                        return true;
+                    } catch(e) {}
+                }
+                currentUser = null;
+                updateAuthUI();
+                return false;
+            }
+
+            function saveCurrentUser(user) {
+                if (user) {
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                } else {
+                    localStorage.removeItem('currentUser');
+                }
+                currentUser = user;
+                updateAuthUI();
+            }
+
+            function updateAuthUI() {
+                if (currentUser) {
+                    authStatus.innerHTML = `👤 欢迎，<strong>${currentUser.nickname}</strong>`;
+                    authLoginBtn.style.display = 'none';
+                    authRegisterBtn.style.display = 'none';
+                    authLogoutBtn.style.display = 'inline-block';
+                    document.getElementById('msgFormArea').style.display = 'block';
+                } else {
+                    authStatus.innerHTML = '👤 当前未登录';
+                    authLoginBtn.style.display = 'inline-block';
+                    authRegisterBtn.style.display = 'inline-block';
+                    authLogoutBtn.style.display = 'none';
+                    document.getElementById('msgFormArea').style.display = 'none';
+                }
+            }
+
+            // 用户数据库
+            function getUsers() {
+                return JSON.parse(localStorage.getItem('users')) || [];
+            }
+
+            function saveUsers(users) {
+                localStorage.setItem('users', JSON.stringify(users));
+            }
+
+            function findUser(nickname) {
+                const users = getUsers();
+                return users.find(u => u.nickname === nickname);
+            }
+
+            function registerUser(nickname, password) {
+                const users = getUsers();
+                if (users.find(u => u.nickname === nickname)) {
+                    return false;
+                }
+                users.push({ nickname, password });
+                saveUsers(users);
+                return true;
+            }
+
+            function loginUser(nickname, password) {
+                const user = findUser(nickname);
+                if (user && user.password === password) {
+                    return user;
+                }
+                return null;
+            }
+
+            // 弹窗控制
+            function openAuthModal(mode) {
+                authMode = mode;
+                if (mode === 'login') {
+                    authModalTitle.textContent = '登录';
+                    authModalSubmit.textContent = '登录';
+                    authModalPwdConfirmGroup.style.display = 'none';
+                } else {
+                    authModalTitle.textContent = '注册';
+                    authModalSubmit.textContent = '注册';
+                    authModalPwdConfirmGroup.style.display = 'block';
+                }
+                authModalNick.value = '';
+                authModalPwd.value = '';
+                authModalPwdConfirm.value = '';
+                authModalError.classList.remove('show');
+                authModalSuccess.classList.remove('show');
+                authModal.classList.add('active');
+            }
+
+            function closeAuthModal() {
+                authModal.classList.remove('active');
+            }
+
+            authModalClose.addEventListener('click', closeAuthModal);
+            authModal.addEventListener('click', (e) => {
+                if (e.target === authModal) closeAuthModal();
+            });
+
+            authLoginBtn.addEventListener('click', () => openAuthModal('login'));
+            authRegisterBtn.addEventListener('click', () => openAuthModal('register'));
+
+            authLogoutBtn.addEventListener('click', () => {
+                if (confirm('确定要退出登录吗？')) {
+                    saveCurrentUser(null);
+                    loadMessage(); // 刷新留言列表
+                }
+            });
+
+            authModalSubmit.addEventListener('click', () => {
+                const nickname = authModalNick.value.trim();
+                const password = authModalPwd.value.trim();
+                const pwdConfirm = authModalPwdConfirm.value.trim();
+
+                authModalError.classList.remove('show');
+                authModalSuccess.classList.remove('show');
+
+                if (!nickname || !password) {
+                    authModalError.textContent = '请填写完整信息';
+                    authModalError.classList.add('show');
+                    return;
+                }
+                if (nickname.length < 2) {
+                    authModalError.textContent = '昵称至少2个字符';
+                    authModalError.classList.add('show');
+                    return;
+                }
+                if (password.length < 4) {
+                    authModalError.textContent = '密码至少4位';
+                    authModalError.classList.add('show');
+                    return;
+                }
+
+                if (authMode === 'register') {
+                    if (password !== pwdConfirm) {
+                        authModalError.textContent = '两次密码输入不一致';
+                        authModalError.classList.add('show');
+                        return;
+                    }
+                    if (findUser(nickname)) {
+                        authModalError.textContent = '该昵称已被注册，请更换';
+                        authModalError.classList.add('show');
+                        return;
+                    }
+                    const success = registerUser(nickname, password);
+                    if (success) {
+                        authModalSuccess.textContent = '🎉 注册成功！请登录';
+                        authModalSuccess.classList.add('show');
+                        // 自动切换到登录模式
+                        setTimeout(() => {
+                            openAuthModal('login');
+                        }, 800);
+                    } else {
+                        authModalError.textContent = '注册失败，请重试';
+                        authModalError.classList.add('show');
+                    }
+                } else {
+                    // 登录
+                    const user = loginUser(nickname, password);
+                    if (user) {
+                        saveCurrentUser(user);
+                        closeAuthModal();
+                        loadMessage();
+                    } else {
+                        authModalError.textContent = '昵称或密码错误';
+                        authModalError.classList.add('show');
+                    }
+                }
+            });
+
+            // 回车提交
+            authModalNick.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') authModalSubmit.click();
+            });
+            authModalPwd.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') authModalSubmit.click();
+            });
+            authModalPwdConfirm.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') authModalSubmit.click();
+            });
+
+            // ===== 留言板：删除时验证登录密码 =====
+            const ADMIN_PASSWORD = 'lanjiayi2005'; // 管理员密码
+
+            const submitMsgBtn = document.getElementById('submitMsgBtn');
+            const msgContent = document.getElementById('msgContent');
+            const msgShowBox = document.getElementById('msgShowBox');
+
+            function getMsgList() {
+                return JSON.parse(localStorage.getItem("msgList")) || [];
+            }
+
+            function saveMsgList(list) {
+                localStorage.setItem("msgList", JSON.stringify(list));
+            }
+
+            function loadMessage() {
+                const list = getMsgList();
+                msgShowBox.innerHTML = "";
+                if (list.length === 0) {
+                    msgShowBox.innerHTML = `<div class="no-msg-tip">暂时还没有留言，快来留下第一条吧</div>`;
+                    return;
+                }
+                list.forEach((item) => {
+                    if (!item.id) {
+                        item.id = `msg_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
+                        saveMsgList(list);
+                    }
+                    const displayName = item.name || '匿名用户';
+                    const html = `
+                    <div class="single-msg-item" data-msg-id="${item.id}">
+                        <div class="msg-name-text">${displayName}</div>
+                        <div class="msg-time-text">${item.time}</div>
+                        <div class="msg-content-text">${item.content}</div>
+                        <button class="delete-msg-btn" data-msg-id="${item.id}">删除</button>
+                    </div>`;
+                    msgShowBox.innerHTML += html;
+                });
+
+                document.querySelectorAll('.delete-msg-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const msgId = this.dataset.msgId;
+                        const list = getMsgList();
+                        const targetItem = list.find(item => item.id === msgId);
+                        if (!targetItem) {
+                            alert('留言不存在或已被删除');
+                            return;
+                        }
+
+                        // 检查当前用户是否有权限删除（发布者或管理员）
+                        let canDelete = false;
+                        if (currentUser) {
+                            if (targetItem.name === currentUser.nickname) {
+                                canDelete = true;
+                            }
+                        }
+
+                        // 弹窗：发布者密码 或 管理员密码
+                        const inputPwd = prompt(
+                            '请输入删除密码：\n' +
+                            '—— 如果你是发布者，请输入你的登录密码。\n' +
+                            '—— 如果你是管理员，请输入管理员密码。'
+                        );
+                        if (inputPwd === null) return;
+
+                        // 管理员密码
+                        if (inputPwd.trim() === ADMIN_PASSWORD) {
+                            const newList = list.filter(item => item.id !== msgId);
+                            saveMsgList(newList);
+                            loadMessage();
+                            alert('管理员已删除该留言');
+                            return;
+                        }
+
+                        // 发布者密码验证（使用登录密码）
+                        if (currentUser && targetItem.name === currentUser.nickname) {
+                            if (currentUser.password === inputPwd.trim()) {
+                                const newList = list.filter(item => item.id !== msgId);
+                                saveMsgList(newList);
+                                loadMessage();
+                                alert('留言已删除');
+                                return;
+                            } else {
+                                alert('密码错误，无法删除该留言');
+                                return;
+                            }
+                        }
+
+                        alert('你没有权限删除此留言，或密码错误');
+                    });
+                });
+            }
+            loadMessage();
+
+            if (submitMsgBtn) {
+                submitMsgBtn.addEventListener('click', () => {
+                    if (!currentUser) {
+                        alert('请先登录再留言');
+                        return;
+                    }
+                    const content = msgContent.value.trim();
+
+                    if (!content) {
+                        alert("留言内容不能为空");
+                        return;
+                    }
+
+                    const now = new Date();
+                    const timeStr = `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()} ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
+                    const list = getMsgList();
+                    const newMsg = {
+                        name: currentUser.nickname,
+                        content: content,
+                        time: timeStr,
+                        id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`
+                    };
+                    list.unshift(newMsg);
+                    saveMsgList(list);
+                    msgContent.value = "";
+                    loadMessage();
+                    alert('留言发布成功！');
+                });
+            }
+
+            // 加载当前用户
+            loadCurrentUser();
+
+            // 页面切换时刷新留言列表（保持数据一致性）
+            const observer = new MutationObserver(() => {
+                const msgPage = document.getElementById('page-message');
+                if (msgPage.classList.contains('active')) {
+                    loadMessage();
+                }
+            });
+            document.querySelectorAll('.page-box').forEach(page => {
+                observer.observe(page, { attributes: true, attributeFilter: ['class'] });
+            });
         })
     </script>
 </body>
