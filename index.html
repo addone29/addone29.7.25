@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -3535,15 +3536,53 @@
             });
         })
     </script>
-    <!-- Waline 留言板 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/waline@latest/dist/waline.css">
-<div id="waline"></div>
-<script src="https://cdn.jsdelivr.net/npm/waline@latest/dist/waline.js"></script>
-<script>
-Waline.init({
-  el: '#waline',
-  serverURL: 'https://waline1-lime.vercel.app/'
-});
-</script>
+
+    <!-- Waline 评论系统（放置于留言板容器内） -->
+    <div id="page-message">
+        <div class="message-box-wrap">
+            <h2 class="msg-title">留言板</h2>
+            <!-- Waline 评论区 -->
+            <div id="waline"></div>
+        </div>
+    </div>
+
+    <!-- Waline CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/waline@latest/dist/waline.css">
+    <script src="https://cdn.jsdelivr.net/npm/waline@latest/dist/waline.js"></script>
+    <script>
+        // Waline 初始化（独立于原有留言系统，只使用 Waline）
+        Waline.init({
+            el: '#waline',
+            serverURL: 'https://waline1-lime.vercel.app/',
+            login: 'enable',
+            avatar: 'mp',
+            pageSize: 10,
+            uploadImage: false,
+            wordLimit: 200,
+            emoji: ['https://cdn.jsdelivr.net/npm/@waline/emojis@1.1.0/bilibili'],
+            locale: {
+                placeholder: '欢迎留下你的想法～（200字以内）',
+                nick: '昵称',
+                mail: '邮箱',
+                link: '网址',
+                submit: '提交',
+                reply: '回复',
+                cancelReply: '取消回复',
+                comments: '留言',
+                cancel: '取消',
+                confirm: '确认',
+                continue: '继续',
+                more: '加载更多',
+                login: '登录',
+                logout: '退出',
+                admin: '管理员',
+                debug: '调试',
+                error: '错误',
+                loading: '加载中',
+                noComment: '还没有留言，快来抢沙发吧！'
+            }
+        });
+    </script>
 </body>
 </html>
+```
